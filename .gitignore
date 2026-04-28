@@ -6,3 +6,9 @@ engine
 *.class
 .DS_Store
 artifacts/
+
+test_core
+
+test_engine
+
+*.log

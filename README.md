@@ -30,3 +30,13 @@ This public-ready build-out adds `docs/CHAPTER.md`, `examples/transcript.txt`, a
 ## GitHub publication note
 
 If this repository appears under `primeodin/undying-allocator`, read it as a chapter of the retrospective archive. The history is honest current work, not an invented twenty-year activity record. The myth is in the voice and the learning arc; the truth is in the archive note.
+
+
+## Public-ready functional build-out
+
+This chapter now includes a larger runnable implementation: source modules, tests, smoke checks, and examples. The code remains intentionally modest and inspectable, but it is no longer just a sketch. Run `./scripts/smoke.sh` to exercise the working path. Domain: `allocator`.
+
+
+## Public-ready functional build-out
+
+This chapter now includes a larger runnable implementation: source modules, tests, smoke checks, and examples. The code remains intentionally modest and inspectable, but it is no longer just a sketch. Run `./scripts/smoke.sh` to exercise the working path. Domain: `allocator`.
