@@ -21,3 +21,12 @@ If you fork this, keep the honesty file. If you improve the code, say what you c
 ## Try it
 
 See the source file in this repository and run the small command shown below. The output is intentionally modest: a number, a trace, a decision, a diagram, or a line of text. Small output is good. Small output lets the mind inspect the machinery.
+
+
+## Built-out archive contents
+
+This public-ready build-out adds `docs/CHAPTER.md`, `examples/transcript.txt`, and `scripts/smoke.sh` so the chapter is not only literary but inspectable. The smoke script is intentionally plain: it compiles or runs the small artifact, prints a short trace, and refuses to hide failure. That is the old bargain. If the rune breaks, the console should say so without ceremony.
+
+## GitHub publication note
+
+If this repository appears under `primeodin/undying-allocator`, read it as a chapter of the retrospective archive. The history is honest current work, not an invented twenty-year activity record. The myth is in the voice and the learning arc; the truth is in the archive note.

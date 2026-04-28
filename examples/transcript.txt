@@ -1,0 +1,3 @@
+$ ./scripts/smoke.sh
+undying-allocator: smoke test for the 2006 retrospective chapter
+The rune holds.
