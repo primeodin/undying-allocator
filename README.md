@@ -31,12 +31,15 @@ This public-ready build-out adds `docs/CHAPTER.md`, `examples/transcript.txt`, a
 
 If this repository appears under `primeodin/undying-allocator`, read it as a chapter of the retrospective archive. The history is honest current work, not an invented twenty-year activity record. The myth is in the voice and the learning arc; the truth is in the archive note.
 
+## What this repository is
 
-## Public-ready functional build-out
+This is a runnable retrospective chapter for **undying-allocator**: C memory-pool allocator experiment focused on bounded failure.
+It is not padded to impress a counter. The implementation is deliberately compact, tested by `./scripts/smoke.sh`, and written so a reader can follow the idea without spelunking through generated fog.
 
-This chapter now includes a larger runnable implementation: source modules, tests, smoke checks, and examples. The code remains intentionally modest and inspectable, but it is no longer just a sketch. Run `./scripts/smoke.sh` to exercise the working path. Domain: `allocator`.
+The allocator experiment lives in `src/undying_allocator.c` / `.h`. It uses a caller-supplied fixed arena, supports aligned bump allocations, records high-water and failed-allocation counters, resets by rewinding the pool while preserving accounting, and checks per-allocation canaries so small overruns are visible to the test suite.
 
+## Public-readiness notes
 
-## Public-ready functional build-out
-
-This chapter now includes a larger runnable implementation: source modules, tests, smoke checks, and examples. The code remains intentionally modest and inspectable, but it is no longer just a sketch. Run `./scripts/smoke.sh` to exercise the working path. Domain: `allocator`.
+- The year marker is narrative context, not a forged GitHub timestamp.
+- The `.retrospective` tag marks this as part of the honest archive reconstruction.
+- Contributions should improve behavior, tests, explanation, or safety — not bulk.
