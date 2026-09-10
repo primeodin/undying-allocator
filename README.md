@@ -20,8 +20,19 @@ If you fork this, keep the honesty file. If you improve the code, say what you c
 
 ## Try it
 
-See the source file in this repository and run the small command shown below. The output is intentionally modest: a number, a trace, a decision, a diagram, or a line of text. Small output is good. Small output lets the mind inspect the machinery.
+```bash
+git clone https://github.com/primeodin/undying-allocator.git
+cd undying-allocator
+./scripts/smoke.sh
+# or without make:
+cc -std=c89 -Wall -O2 -Isrc -o main main.c src/rune_core.c src/undying_allocator.c -lm
+cc -std=c89 -Wall -O2 -Isrc -o test_core tests/test_core.c src/rune_core.c src/undying_allocator.c -lm
+./test_core && ./main
+```
 
+**Expected** (deterministic on this tree): `c tests pass`, then an arena line with `alloc_a=yes alloc_b=yes exhausted=yes … failed=1 check=ok`, then a reset line with `used=0` and `resets=1`.
+
+Hand-worked trap (one-byte overrun kills the tail fence): **[docs/why-canaries.md](docs/why-canaries.md)**.
 
 ## Built-out archive contents
 
@@ -36,7 +47,11 @@ If this repository appears under `primeodin/undying-allocator`, read it as a cha
 This is a runnable retrospective chapter for **undying-allocator**: C memory-pool allocator experiment focused on bounded failure.
 It is not padded to impress a counter. The implementation is deliberately compact, tested by `./scripts/smoke.sh`, and written so a reader can follow the idea without spelunking through generated fog.
 
-The allocator experiment lives in `src/undying_allocator.c` / `.h`. It uses a caller-supplied fixed arena, supports aligned bump allocations, records high-water and failed-allocation counters, resets by rewinding the pool while preserving accounting, and checks per-allocation canaries so small overruns are visible to the test suite.
+The allocator experiment lives in `src/undying_allocator.c` / `.h`. It uses a caller-supplied fixed arena, supports aligned bump allocations, records high-water and failed-allocation counters, resets by rewinding the pool while preserving accounting, and checks per-allocation canaries so small overruns are visible to the test suite. Why the fences matter (and why exhaustion is the loud failure while overrun is the quiet one): [docs/why-canaries.md](docs/why-canaries.md).
+
+## Shipped teaching note
+
+- [docs/why-canaries.md](docs/why-canaries.md) — head+tail canaries vs silent overrun; hand-worked `p[8]=0x7f` trap matching `test_allocator_canary_check`.
 
 ## Public-readiness notes
 
