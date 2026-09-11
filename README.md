@@ -53,6 +53,13 @@ The allocator experiment lives in `src/undying_allocator.c` / `.h`. It uses a ca
 
 - [docs/why-canaries.md](docs/why-canaries.md) — head+tail canaries vs silent overrun; hand-worked `p[8]=0x7f` trap matching `test_allocator_canary_check`.
 
+## Help / good first issues
+
+First PR friendly — claim one in a comment:
+
+- **#1** — [`docs/start-here.md`](https://github.com/primeodin/undying-allocator/issues/1) walkthrough (`make` → smoke → arena lines)
+- **#2** — [`examples/canary-stomp.txt`](https://github.com/primeodin/undying-allocator/issues/2) annotated overrun + check
+
 ## Public-readiness notes
 
 - The year marker is narrative context, not a forged GitHub timestamp.
