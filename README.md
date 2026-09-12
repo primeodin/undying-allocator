@@ -20,6 +20,8 @@ If you fork this, keep the honesty file. If you improve the code, say what you c
 
 ## Try it
 
+For a step-by-step walkthrough, see [docs/start-here.md](docs/start-here.md).
+
 ```bash
 git clone https://github.com/primeodin/undying-allocator.git
 cd undying-allocator
