@@ -32,6 +32,8 @@ cc -std=c89 -Wall -O2 -Isrc -o test_core tests/test_core.c src/rune_core.c src/u
 
 **Expected** (deterministic on this tree): `c tests pass`, then an arena line with `alloc_a=yes alloc_b=yes exhausted=yes … failed=1 check=ok`, then a reset line with `used=0` and `resets=1`.
 
+A step-by-step cold-start walkthrough lives in **[docs/start-here.md](docs/start-here.md)**.
+
 Hand-worked trap (one-byte overrun kills the tail fence): **[docs/why-canaries.md](docs/why-canaries.md)**.
 
 ## Built-out archive contents
