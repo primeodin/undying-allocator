@@ -1,0 +1,44 @@
+Annotated transcript: exhaustion is loud, an overrun is quiet
+================================================================
+
+Setup (same numbers as tests/test_core.c, test_allocator_canary_check):
+
+    unsigned char buf[192];
+    UndyingArena arena;
+    unsigned char *p;
+
+    undying_arena_init(&arena, buf, sizeof(buf));
+    p = (unsigned char *)undying_alloc(&arena, 8);
+
+Step 1  p is non-NULL: the 8-byte payload fits in the 192-byte arena, so
+        undying_alloc placed [header | head canary] [payload] [tail canary].
+
+            undying_check(&arena)      -> ok (1)
+
+Step 2  Write only the legal payload bytes p[0] through p[7]. The fences are
+        untouched.
+
+            p[0]..p[7] = 0x11          // 8 bytes, exactly what was requested
+            undying_check(&arena)      -> ok (1)
+
+Step 3  Write one byte past the payload. p[8] is the first byte of the tail
+        canary, not spare payload.
+
+            p[8] = 0x7f
+            undying_check(&arena)      -> bad (0)
+
+Why it is quiet: the write did not crash and did not change any OS flag. It
+poisoned the fence the allocator left for itself (UNDYING_CANARY 0x55414c43,
+little-endian bytes "CLAU"). Only undying_check notices.
+
+Contrast: exhaustion is loud
+------------------------------
+On the 512-byte arena in main.c, after a 40-byte allocation and a 96-byte
+aligned allocation, a request for the whole arena returns NULL and bumps the
+failure counters on the spot:
+
+    arena alloc_a=yes alloc_b=yes exhausted=yes ... failed=1 check=ok
+
+The NULL and failed=1 are the arena refusing up front. The canary trap stays
+quiet until you ask undying_check, which is why tests call it after every
+memset. Fence != payload: see docs/why-canaries.md.
